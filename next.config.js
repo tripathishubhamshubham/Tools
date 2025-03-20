@@ -7,6 +7,7 @@ const nextConfig = {
   },
   assetPrefix: '/Tools/',
   trailingSlash: true,
+  distDir: 'out',
 }
 
 module.exports = nextConfig 
