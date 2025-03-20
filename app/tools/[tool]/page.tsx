@@ -1,5 +1,3 @@
-'use client';
-
 import { useParams } from 'next/navigation';
 import { notFound } from 'next/navigation';
 import WordCounter from '@/components/tools/WordCounter';
@@ -10,6 +8,8 @@ import PercentageCalculator from '@/components/tools/calculators/PercentageCalcu
 import BmiCalculator from '@/components/tools/calculators/BmiCalculator';
 import AgeCalculator from '@/components/tools/calculators/AgeCalculator';
 import CaloriesCalculator from '@/components/tools/calculators/CaloriesCalculator';
+import ClientWrapper from './ClientWrapper';
+export { generateStaticParams } from './staticParams';
 
 // Tool components mapping
 const toolComponents: { [key: string]: React.ComponentType } = {
@@ -132,83 +132,74 @@ const getToolInfo = (slug: string) => {
   };
 };
 
-export default function ToolPage() {
-  const params = useParams();
-  const toolSlug = params.tool as string;
+interface Props {
+  params: { tool: string }
+}
 
-  // Get the component for this tool
+export default function ToolPage({ params }: Props) {
+  const toolSlug = params.tool;
   const ToolComponent = toolComponents[toolSlug];
   const toolInfo = getToolInfo(toolSlug);
 
-  // If no component exists for this tool, show coming soon
   if (!ToolComponent) {
     return (
-      <div className="max-w-4xl mx-auto p-6">
-        <div className="text-center py-12">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-            {toolInfo.name}
-          </h1>
-          <p className="text-gray-600 dark:text-gray-300 mb-8">
-            {toolInfo.description}
-          </p>
-          <div className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
-            Coming Soon
+      <ClientWrapper>
+        <div className="max-w-4xl mx-auto p-6">
+          <div className="text-center py-12">
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              {toolInfo.name}
+            </h1>
+            <p className="text-gray-600 dark:text-gray-300 mb-8">
+              {toolInfo.description}
+            </p>
+            <div className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
+              Coming Soon
+            </div>
           </div>
         </div>
-      </div>
+      </ClientWrapper>
     );
   }
 
   return (
-    <div className="max-w-4xl mx-auto">
-      {/* Tool Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-          {toolInfo.name}
-        </h1>
-        <p className="text-gray-600 dark:text-gray-300">
-          {toolInfo.description}
-        </p>
-      </div>
+    <ClientWrapper>
+      <div className="max-w-4xl mx-auto">
+        {/* Tool Header */}
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+            {toolInfo.name}
+          </h1>
+          <p className="text-gray-600 dark:text-gray-300">
+            {toolInfo.description}
+          </p>
+        </div>
 
-      {/* Main Tool */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8">
-        <ToolComponent />
-      </div>
+        {/* Main Tool */}
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8">
+          <ToolComponent />
+        </div>
 
-      {/* Tool Information */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8">
-        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-          About {toolInfo.name}
-        </h2>
-        <div className="prose dark:prose-invert">
-          <p>{toolInfo.description}</p>
-          <h3>Features:</h3>
-          <ul>
-            {toolInfo.features.map((feature, index) => (
-              <li key={index}>{feature}</li>
-            ))}
-          </ul>
+        {/* Tool Information */}
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8">
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+            About {toolInfo.name}
+          </h2>
+          <div className="prose dark:prose-invert">
+            <p>{toolInfo.description}</p>
+            <h3>Features:</h3>
+            <ul>
+              {toolInfo.features.map((feature, index) => (
+                <li key={index}>{feature}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Ad Section */}
+        <div className="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg text-center">
+          <span className="text-gray-600 dark:text-gray-300">Advertisement Space</span>
         </div>
       </div>
-
-      {/* Ad Section */}
-      <div className="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg text-center">
-        <span className="text-gray-600 dark:text-gray-300">Advertisement Space</span>
-      </div>
-    </div>
+    </ClientWrapper>
   );
-}
-
-export function generateStaticParams() {
-  return [
-    { tool: 'word-counter' },
-    { tool: 'image-to-png' },
-    { tool: 'image-to-jpg' },
-    { tool: 'image-resizer' },
-    { tool: 'percentage-calculator' },
-    { tool: 'bmi-calculator' },
-    { tool: 'age-calculator' },
-    { tool: 'calories-calculator' }
-  ]
 } 
