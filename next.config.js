@@ -5,6 +5,8 @@ const nextConfig = {
   images: {
     unoptimized: true, // Required for static export
   },
+  assetPrefix: '/Tools/',
+  trailingSlash: true,
 }
 
 module.exports = nextConfig 
