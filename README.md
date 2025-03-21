@@ -2,6 +2,12 @@
 
 A comprehensive collection of free online tools built with Next.js and Tailwind CSS. This website provides users with over 100 useful tools for various purposes, including image conversion, text manipulation, SEO analysis, development utilities, and more.
 
+## Prerequisites
+
+Before you begin, ensure you have the following installed:
+- Node.js 18.17 or later
+- npm (comes with Node.js)
+
 ## Features
 
 - 🛠️ 100+ Free Tools
@@ -25,13 +31,6 @@ A comprehensive collection of free online tools built with Next.js and Tailwind 
 - Social Media Tools
 - And more...
 
-## Tech Stack
-
-- [Next.js](https://nextjs.org/) - React Framework
-- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS Framework
-- [TypeScript](https://www.typescriptlang.org/) - Type-safe JavaScript
-- [@tailwindcss/typography](https://tailwindcss.com/docs/typography-plugin) - Beautiful typography defaults
-
 ## Getting Started
 
 1. Clone the repository:
@@ -45,7 +44,7 @@ A comprehensive collection of free online tools built with Next.js and Tailwind 
    npm install
    ```
 
-3. Run the development server:
+3. Start the development server:
    ```bash
    npm run dev
    ```
@@ -65,6 +64,29 @@ A comprehensive collection of free online tools built with Next.js and Tailwind 
 ├── public/             # Static assets
 └── styles/            # Global styles
 ```
+
+## Available Scripts
+
+- `npm run dev` - Start the development server
+- `npm run build` - Build the production version
+- `npm run start` - Start the production server
+- `npm run lint` - Run ESLint
+
+## Tech Stack
+
+- [Next.js](https://nextjs.org/) - React Framework
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS Framework
+- [TypeScript](https://www.typescriptlang.org/) - Type-safe JavaScript
+- [@tailwindcss/typography](https://tailwindcss.com/docs/typography-plugin) - Beautiful typography defaults
+
+## Troubleshooting
+
+If you encounter any issues:
+
+1. Make sure you have Node.js 18.17 or later installed
+2. Delete the `.next` folder and `node_modules` folder
+3. Run `npm install` again
+4. Start the development server with `npm run dev`
 
 ## Contributing
 
